@@ -341,7 +341,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     }
     
     if settings.style.buttonBarButtonItemBorder {
-      if let borderLineBgColor = settings.style.buttonBarBackgroundColor {
+      if let borderLineBgColor = settings.style.buttonBarButtonItemBorderLineBackgroundColor {
         let line: CALayer = CALayer()
         line.frame = CGRect(x: cell.frame.width - 1, y: 8, width: 1, height: cell.frame.height - 16)
         line.backgroundColor = borderLineBgColor.cgColor
