@@ -57,7 +57,8 @@ public struct ButtonBarPagerTabStripSettings {
     public var buttonBarItemLeftRightMargin: CGFloat = 8
     public var buttonBarItemTitleColor: UIColor?
     
-    public var buttonBarButtonItemBorder: CALayer?
+    public var buttonBarButtonItemBorder: Bool = false
+    public var buttonBarButtonItemBorderLineBackgroundColor: UIColor?
     
     @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
       set {
@@ -339,9 +340,14 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
       cell.imageView.highlightedImage = highlightedImage
     }
     
-    if let borderLine = settings.style.buttonBarButtonItemBorder {
-      if indexPath.row + 1 < viewControllers.count {
-        cell.layer.addSublayer(borderLine)
+    if settings.style.buttonBarButtonItemBorder {
+      if let borderLineBgColor = settings.style.buttonBarBackgroundColor {
+        let line: CALayer = CALayer()
+        line.frame = CGRect(x: cell.frame.width - 1, y: 8, width: 1, height: cell.frame.height - 16)
+        line.backgroundColor = borderLineBgColor.cgColor
+        if indexPath.row + 1 < viewControllers.count {
+          cell.layer.addSublayer(line)
+        }
       }
     }
     
